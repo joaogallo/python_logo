@@ -14,31 +14,75 @@ class tartaruga(turtle.Turtle):
             self.right(90)
 
     def para_frente(self, distance=100):
-        print(f"Avançando {distance} passos")
         turtle.forward(distance)
+        return(f"Avançando {distance} passos")
+
     
     def para_tras(self, distance=100):
-        print(f"Retornando {distance} passos")
-        turtle.forward(distance)
+        turtle.backward(distance)
+        return(f"Retornando {distance} passos")
+
 
     def virar_esquerda(self, angle=90):
-        if angle != 90:
-            print(f"Girando {angle}o a esquerda")
         turtle.left(angle)
+        if angle != 90:
+            return(f"Girando {angle}o a esquerda")
+        else:
+            return("Girando à esquerda")
+        
 
     def virar_direita(self, angle=90):
-        if angle != 90:
-            print(f"Girando {angle}o a esquerda")
         turtle.right(angle)
+        if angle != 90:
+            return(f"Girando {angle}o à direita")
+        else:
+            return("Girando à direita")
 
-window = turtle.Screen()
+    def executa_comando(self, comando: str):
+        if comando == "para_frente":
+            return(self.para_frente())
+        elif comando == "para_tras":
+            return(self.para_tras())
+        elif comando == "virar_esquerda":
+            return(self.virar_esquerda())
+        elif comando == "virar_direita":
+            return(self.virar_direita())
+        else:
+            print("Comando não reconhecido")
+
+window = turtle.Screen() 
 
 # # -----------------------------------
-# my_turtle = tartaruga()
-# my_turtle.para_frente()
-# my_turtle.virar_esquerda()
-# my_turtle.para_tras()
-# my_turtle.virar_direita()
-# # -----------------------------------
+michelangelo = tartaruga()
+
+lista_de_comandos = ["para_frente", "para_tras", "virar_esquerda", "virar_direita"]
+programa = []
+while True:
+    while True:
+        print(f"Programa: {programa}")
+        comando = input("Digite o comando ([ENTER] para encerrar): ")
+        if comando == "":
+            confirmacao = ""
+            while confirmacao not in ["S", "N"]:
+                confirmacao = str.upper(input("Deseja executar o programa? (S/N)"))
+            if confirmacao == "S":
+                break
+            else:
+                continue
+        if comando in lista_de_comandos:
+            programa.append(comando)
+        else:
+            print(f"{comando} não é um comando conhecido")
+
+    for comando in programa:
+        print(f"{comando}: {michelangelo.executa_comando(comando)}")
+    
+    confirmacao = ""
+    while confirmacao not in ["S", "N"]:
+        confirmacao = str.upper(input("Deseja encerrar o programa? (S/N)"))
+    if confirmacao == "S":
+        break
+    else:
+        continue
 
 # window.mainloop()
