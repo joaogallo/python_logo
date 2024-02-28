@@ -76,6 +76,7 @@ while True:
 
     for comando in programa:
         print(f"{comando}: {michelangelo.executa_comando(comando)}")
+    programa = []
     
     confirmacao = ""
     while confirmacao not in ["S", "N"]:
