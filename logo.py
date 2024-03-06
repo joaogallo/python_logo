@@ -1,9 +1,10 @@
 import turtle
 
 # Classe base Turtle
-class tartaruga(turtle.Turtle):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+class Tartaruga(turtle.Turtle):
+    def __init__(self, name: str):
+        self.name = name
+        super().__init__()
         # Inicializações adicionais, se necessário
         turtle.bgcolor("black")
         turtle.pencolor("white")
@@ -15,28 +16,28 @@ class tartaruga(turtle.Turtle):
 
     def para_frente(self, distance=100):
         turtle.forward(distance)
-        return(f"Avançando {distance} passos")
+        return(f"{self.name} andou {distance} passos para frente")
 
     
     def para_tras(self, distance=100):
         turtle.backward(distance)
-        return(f"Retornando {distance} passos")
+        return(f"{self.name} andou {distance} passos para trás")
 
 
     def virar_esquerda(self, angle=90):
         turtle.left(angle)
         if angle != 90:
-            return(f"Girando {angle}o a esquerda")
+            return(f"{self.name} girou {angle}o a esquerda")
         else:
-            return("Girando à esquerda")
+            return(f"{self.name} virou à esquerda")
         
 
     def virar_direita(self, angle=90):
         turtle.right(angle)
         if angle != 90:
-            return(f"Girando {angle}o à direita")
+            return(f"{self.name} girou {angle}o à direita")
         else:
-            return("Girando à direita")
+            return(f"{self.name} virou à direita")
 
     def executa_comando(self, comando: str):
         if comando == "para_frente":
@@ -53,10 +54,13 @@ class tartaruga(turtle.Turtle):
 window = turtle.Screen() 
 
 # # -----------------------------------
-michelangelo = tartaruga()
+nome = input("Digite o nome do seu robô: ") 
+tartaruga = Tartaruga(nome)
 
 lista_de_comandos = ["para_frente", "para_tras", "virar_esquerda", "virar_direita"]
 programa = []
+
+linha_programa = 0
 while True:
     while True:
         print(f"Programa: {programa}")
@@ -75,7 +79,8 @@ while True:
             print(f"{comando} não é um comando conhecido")
 
     for comando in programa:
-        print(f"{comando}: {michelangelo.executa_comando(comando)}")
+        linha_programa += 1
+        print(f"{linha_programa}: {tartaruga.executa_comando(comando)}")
     programa = []
     
     confirmacao = ""
