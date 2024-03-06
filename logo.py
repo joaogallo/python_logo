@@ -63,7 +63,9 @@ programa = []
 linha_programa = 0
 while True:
     while True:
-        print(f"Programa: {programa}")
+        if len(programa) > 0:
+            print(f"\nPrograma: {programa}")
+        print(f"Lista de comandos: {lista_de_comandos}\n")
         comando = input("Digite o comando ([ENTER] para encerrar): ")
         if comando == "":
             confirmacao = ""
